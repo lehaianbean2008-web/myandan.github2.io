@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Góc Thư Giãn - Bốn Mùa Bình Yên</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff69b4;
+            --dark-pink: #ff1493;
+            --bg-color: #faf3ee;
+            --text-color: #4a3f35;
+            --accent-brown: #c97b63;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('temple.jpg') center/cover no-repeat;
+            color: white; padding: 100px 20px; text-align: center; border-bottom: 5px solid var(--primary-pink);
+        }
+
+        header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; }
+
+        nav {
+            background: white; padding: 15px; text-align: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
+        }
+
+        nav a {
+            margin: 0 15px; text-decoration: none; color: var(--primary-pink);
+            font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 0.85rem;
+            padding-bottom: 5px; border-bottom: 3px solid transparent;
+            transition: 0.3s;
+        }
+
+        nav a.active {
+            border-bottom: 3px solid var(--dark-pink);
+            color: var(--dark-pink);
+        }
+
+        .container { width: 90%; max-width: 1200px; margin: 40px auto; display: flex; gap: 30px; }
+        .main-content { flex: 1; }
+        aside.left-box { width: 280px; flex-shrink: 0; }
+        .sticky-wrapper { position: sticky; top: 80px; }
+        .left-item { background: white; padding: 10px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .left-item img { width: 100%; border-radius: 10px; }
+
+        .post { background: white; padding: 35px; margin-bottom: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .post h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 10px; color: #333; }
+        .meta { font-size: 0.8rem; color: #aaa; margin-bottom: 15px; display: block; }
+        .post-banner { width: 100%; height: 400px; object-fit: cover; border-radius: 15px; margin: 20px 0; }
+
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; height: 200px; }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .info { position: absolute; inset: 0; background: rgba(255, 105, 180, 0.85); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: 0.3s; }
+        .card:hover .info { opacity: 1; }
+
+        .sub-page { display: none; background: white; padding: 40px; border-radius: 20px; animation: fadeIn 0.4s ease; text-align: center; }
+        .btn-back { background: var(--accent-brown); color: white; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; margin-bottom: 20px; }
+        
+        /* MP3 Player Style */
+        .audio-player-container {
+            margin: 20px auto; padding: 25px; background: #fff0f5;
+            border-radius: 20px; max-width: 450px; border: 1px dashed var(--primary-pink);
+        }
+        audio { width: 100%; height: 45px; }
+
+        /* Comment Section Style */
+        .comment-section {
+            background: white; padding: 35px; border-radius: 20px;
+            margin-top: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .comment-section h3 { font-family: 'Playfair Display', serif; margin-bottom: 20px; color: var(--accent-brown); }
+        .comment-form input, .comment-form textarea {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: 1px solid #ddd; border-radius: 10px; font-family: inherit;
+        }
+        .comment-form textarea { height: 100px; resize: none; }
+        .btn-submit {
+            background: var(--primary-pink); color: white; border: none;
+            padding: 10px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: 0.3s;
+        }
+        .btn-submit:hover { background: var(--dark-pink); }
+        
+        .comment-list { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        .comment-item {
+            background: #fafafa; padding: 15px; border-radius: 10px;
+            margin-bottom: 15px; border-left: 4px solid var(--primary-pink);
+        }
+        .comment-item b { color: var(--dark-pink); }
+        .comment-item small { color: #999; display: block; margin-bottom: 5px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+        footer { text-align: center; padding: 40px; background: #2c2c2c; color: #999; margin-top: 50px; }
+        @media (max-width: 900px) { .container { flex-direction: column; } aside.left-box { width: 100%; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Góc Thư Giãn</h1>
+        <p>"Nằm yên trong vạt nắng, thơ thẩn trong gió ngàn"</p>
+    </header>
+
+    <nav id="main-nav">
+        <a id="nav-home" onclick="goHome()" class="active">Trang Chủ</a>
+        <a id="nav-yeu-page" onclick="openPage('yeu-page')">Yêu</a>
+        <a id="nav-thuong-page" onclick="openPage('thuong-page')">Thương</a>
+        <a id="nav-men-page" onclick="openPage('men-page')">Mến</a>
+    </nav>
+
+    <div class="container">
+        <aside class="left-box">
+            <div class="sticky-wrapper">
+                <h3 style="margin-bottom:15px; color:var(--accent-brown)">🌿 Khoảnh khắc</h3>
+                <div class="left-item"><img src="6-.jpg"><p align="center">Bình yên</p></div>
+                <div class="left-item"><img src="5-.jpg"><p align="center">Nắng mai</p></div>
+                <div class="left-item"><img src="4-.jpg"><p align="center">Gió nhẹ</p></div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div id="main-page">
+                <article class="post">
+                    <span class="meta">Đăng ngày 10/02/2026 • Mùa Xuân</span>
+                    <h2>Xuân sang vạt nắng hồng</h2>
+                    <p>Mùa xuân gõ cửa, mang theo những tia nắng mật ngọt và làn gió mơn man qua từng kẽ lá. 
+        Đây là lúc vạn vật rũ bỏ lớp áo cũ kỹ của mùa đông để khoác lên mình sắc xanh non của lộc biếc 
+        và sắc hồng rạng rỡ của những đóa hoa. Hạnh phúc đôi khi chỉ là được hít hà mùi hương của đất trời lúc sang xuân, 
+        thấy lòng mình nhẹ tênh và tràn đầy hy vọng mới.</p>
+                    <img src="1-.jpg" class="post-banner">
+                    <div class="gallery">
+                        <div class="card" onclick="openPage('gio-ngan-page')">
+                            <img src="nature1.jpg"><div class="info"><h3>Gió ngàn</h3><p>Nhạc nhẹ (MP3)</p></div>
+                        </div>
+                        <div class="card" onclick="openPage('nang-som-page')">
+                            <img src="nature2.jpg"><div class="info"><h3>Nắng sớm</h3><p>Piano chill (MP3)</p></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post">
+                    <span class="meta">Đăng ngày 07/02/2026 • Mùa Hạ</span>
+                    <h2>Hạ về trong tiếng ve ngân</h2>
+                    <p>Khi những tia nắng bắt đầu trở nên vàng rực và gay gắt hơn, ta biết rằng mùa hạ đã thực sự gõ cửa. Đây là mùa của những vòm lá xanh thẫm, của tiếng ve râm ran gọi hè và của những cơn mưa rào bất chợt đến rồi đi nhanh chóng. Trong cái không khí oi ả của đất trời, hạnh phúc đôi khi chỉ đơn giản là tìm được một bóng râm mát rượi, thưởng thức một ly nước mát lạnh và để tâm hồn mình trôi lững lờ theo những đám mây trắng bồng bềnh trên bầu trời xanh thẳm. Hạ không chỉ là cái nắng cháy da thịt, mà còn là khoảng thời gian rực rỡ nhất để ta sống trọn vẹn với những nhiệt huyết của tuổi trẻ.</p>
+                    <img src="2-.jpg" class="post-banner">
+                </article>
+            </div>
+
+            <div id="gio-ngan-page" class="sub-page">
+                <button class="btn-back" onclick="goHome()">⬅ Quay lại</button>
+                <h2>🍃 Gió Ngàn</h2>
+                <div class="audio-player-container">
+                    <audio controls id="audio-gio"><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+
+            <div id="nang-som-page" class="sub-page">
+                <button class="btn-back" onclick="goHome()">⬅ Quay lại</button>
+                <h2>☀️ Nắng Sớm</h2>
+                <div class="audio-player-container">
+                    <audio controls id="audio-nang"><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+
+            <div id="yeu-page" class="sub-page">
+                <button class="btn-back" onclick="goHome()">⬅ Quay lại</button>
+                <h2>💕 Góc Yêu Thương</h2>
+                <p>Nơi lưu giữu tình cảm chân thành.</p>
+                <img src="river.jpg" class="post-banner">
+                <p><b>Chuyện về đôi bàn tay và những mùa bình yên</b></p>
+                <p>Người ta thường hỏi nhau tình yêu chân thành có hình dáng như thế nào. Có người bảo nó rực rỡ như nắng hạ, có người lại nói nó nồng nàn như đóa hồng xuân. Nhưng với ông bà, tình yêu chân thành chỉ đơn giản là một sự hiện diện tĩnh lặng qua năm tháng.</p>
+                <p>Ông gặp bà vào một buổi chiều thu lá rụng đầy sân. Chẳng có lời thề non hẹn biển, họ cứ thế nắm tay nhau đi qua những ngày xanh trẻ. Tình yêu của họ không được đo bằng những món quà xa xỉ, mà bằng cách ông luôn để dành cho bà phần cơm ngon nhất, hay cách bà tỉ mẩn khâu lại chiếc áo sờn vai của ông.</p>
+                <p>Có một mùa đông buốt giá, khi bà đổ bệnh nằm trên giường, ông chẳng nói những lời hoa mỹ. Ông chỉ lặng lẽ dậy sớm, đun một ấm nước gừng ấm, rồi ngồi bên cạnh nắm chặt lấy bàn tay gầy guộc của bà. Cái hơi ấm từ bàn tay thô ráp của người đồng hành suốt mấy mươi năm ấy chính là liều thuốc kỳ diệu nhất. Bà bảo, chỉ cần cảm nhận được nhịp tim của ông qua kẽ tay, bà biết mình vẫn còn một chốn bình yên để trở về.</p>
+                <p>Khi tuổi già kéo đến như những vạt nắng xế chiều, họ vẫn ngồi bên hiên nhà, cùng nhau nghe tiếng ve ngân của mùa hạ hay ngắm những mầm non nhú lên lúc xuân sang. Tình yêu chân thành không phải là tìm được một người hoàn hảo để yêu, mà là khi ta nhìn thấy những điều không hoàn hảo của nhau nhưng vẫn chọn ở lại, chọn bao dung và chọn cùng nhau già đi.</p>
+            </div>
+            <div id="thuong-page" class="sub-page">
+                <button class="btn-back" onclick="goHome()">⬅ Quay lại</button>
+                <h2>💗 Lòng Thương Cảm</h2>
+                <p>Thấu hiểu và chia sẻ.</p>
+                <img src="8-.jpg" class="post-banner">
+                <p>Lòng thương cảm đôi khi chỉ là một khoảnh khắc dừng lại để thấu hiểu nỗi đau của một người lạ mà chẳng cần bất kỳ lý do nào. Trong một buổi chiều mưa tầm tã, một cậu bé đang đứng trú mưa dưới hiên cửa hàng thì thấy một cụ già bán vé số ướt đẫm, run rẩy nép vào một góc tường nhỏ hẹp. Thay vì chỉ đứng nhìn, cậu bé lặng lẽ bước tới, mở chiếc ô duy nhất của mình ra che cho cụ và nhẹ nhàng mua giúp vài tờ vé số cuối cùng bằng số tiền tiết kiệm ít ỏi. Cụ già ngước nhìn với đôi mắt nhòe lệ, cảm ơn không phải vì số tiền mà vì hơi ấm từ sự tử tế của một người không hề quen biết. Thương cảm không phải là sự ban ơn, mà là khi ta nhìn thấy chính mình trong nỗi khổ của người khác, để rồi sẵn lòng chìa tay ra vỗ về, giúp họ tin rằng thế gian này vẫn còn rất nhiều sự dịu dàng hiện hữu.</p>
+            </div>
+            <div id="men-page" class="sub-page">
+                <button class="btn-back" onclick="goHome()">⬅ Quay lại</button>
+                <h2>🌷 Sự Quý Mến</h2>
+                <p>Những nhân duyên tốt đẹp.</p>
+                <img src="7-.jpg" class="post-banner">
+                <p>Sự quý mến bắt nguồn từ những rung động giản đơn khi hai tâm hồn tìm thấy sự đồng điệu mà không cần đến những ràng buộc quá lớn lao. Có hai người bạn già cứ mỗi buổi chiều lại ra ngồi bên chiếc ghế gỗ quen thuộc dưới gốc đa đầu làng, chẳng cần nói với nhau quá nhiều, chỉ đơn giản là cùng nhau ngắm nhìn hoàng hôn rực rỡ và lắng nghe tiếng chim về tổ. Sự quý mến giữa họ được xây dựng từ những lần thấu hiểu thầm lặng, là khi một người biết người kia thích uống trà đậm vị sen, hay khi một người lặng lẽ nhường chỗ mát hơn cho bạn mình mà không một lời kể công. Đó là một loại tình cảm trong sáng và nhẹ nhàng như hương hoa nhài buổi sớm, không nồng cháy như tình yêu nhưng lại bền bỉ và sâu sắc, đủ để khiến cuộc đời mỗi người trở nên ấm áp hơn vì biết rằng giữa thế gian rộng lớn, vẫn luôn có một người chân thành trân trọng và mến mộ sự hiện diện của mình.</p>
+            </div>
+
+            <section class="comment-section" id="comment-area">
+                <h3>💬 Chia sẻ cảm xúc</h3>
+                <div class="comment-form">
+                    <input type="text" id="com-name" placeholder="Tên của bạn...">
+                    <textarea id="com-text" placeholder="Bạn đang nghĩ gì thế?"></textarea>
+                    <button class="btn-submit" onclick="addComment()">Gửi bình luận</button>
+                </div>
+
+                <div class="comment-list" id="comment-list">
+                    <div class="comment-item">
+                        <small>10/02/2026</small>
+                        <b>Admin:</b> Chào mừng bạn đến với Góc Thư Giãn!
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer><p>© 2026 Góc Thư Giãn | Designed with ❤️</p></footer>
+
+    <script>
+        function openPage(pageId) {
+            document.getElementById("main-page").style.display = "none";
+            document.getElementById("comment-area").style.display = "none"; // Ẩn bình luận khi vào trang nhạc
+            document.querySelectorAll(".sub-page").forEach(p => p.style.display = "none");
+            
+            const target = document.getElementById(pageId);
+            if(target) { target.style.display = "block"; window.scrollTo(0,0); }
+            updateNav(pageId);
+        }
+
+        function goHome() {
+            const allAudio = document.querySelectorAll('audio');
+            allAudio.forEach(track => { track.pause(); track.currentTime = 0; });
+
+            document.querySelectorAll(".sub-page").forEach(p => p.style.display = "none");
+            document.getElementById("main-page").style.display = "block";
+            document.getElementById("comment-area").style.display = "block"; // Hiện lại bình luận
+            window.scrollTo(0,0);
+            updateNav('home');
+        }
+
+        function updateNav(activeId) {
+            document.querySelectorAll("nav a").forEach(a => a.classList.remove("active"));
+            const activeNav = document.getElementById("nav-" + activeId);
+            if(activeNav) activeNav.classList.add("active");
+        }
+
+        // HÀM XỬ LÝ BÌNH LUẬN
+        function addComment() {
+            const name = document.getElementById('com-name').value;
+            const text = document.getElementById('com-text').value;
+            const list = document.getElementById('comment-list');
+
+            if (name === "" || text === "") {
+                alert("Vui lòng nhập tên và nội dung nhé!");
+                return;
+            }
+
+            const now = new Date();
+            const timeStr = now.toLocaleDateString('vi-VN');
+
+            const newComment = document.createElement('div');
+            newComment.className = 'comment-item';
+            newComment.innerHTML = `<small>${timeStr}</small><b>${name}:</b> ${text}`;
+            
+            list.prepend(newComment); // Thêm bình luận mới lên đầu
+
+            // Xóa sạch ô nhập sau khi gửi
+            document.getElementById('com-name').value = "";
+            document.getElementById('com-text').value = "";
+        }
+    </script>
+</body>
+</html>
